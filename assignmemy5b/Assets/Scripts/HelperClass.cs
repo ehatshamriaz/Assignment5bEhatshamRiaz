@@ -9,7 +9,9 @@ using UnityEngine.UI;
 namespace roll_a_ball_helper
 {
 	public class HelperClass
-	{
+    {
+        private char[] myChars;
+        private int open_bracket, Close_bracket; 
 		private Collider[] colliders;
 		public bool checkSpawnPosition(Vector3 SpawnPos)
 		{
@@ -142,20 +144,44 @@ namespace roll_a_ball_helper
 			
 			return new string(str);
 		}
-		
-		public bool checkPalindrome(string str)
-		{
-			int l = str.Length;
-			for (int i = 0; i < l / 2; i++)
-			{
-				if (str[i] != str[l - 1 - i])
-				{
-					return false;
-				}
-			}
-			return true;
-			
-		}
+
+        public bool checkPalindrome(string str)
+        {
+            int l = str.Length;
+            for (int i = 0; i < l / 2; i++)
+            {
+                if (str[i] != str[l - 1 - i])
+                {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+        public bool checkBalanceParenthesis(string str)
+        {
+            open_bracket = 0;
+            Close_bracket = 0;
+             myChars = str.ToCharArray(); 
+            for (int i = 0; i < myChars.Length; i++)
+            {
+                if (myChars[i] == '(')
+                {
+                    open_bracket++;
+                }
+                else if (myChars[i] == ')')
+                {
+                    Close_bracket++;
+                }
+            }
+            if (open_bracket != Close_bracket)
+            {
+                return false;
+            }
+            return true;
+
+        }
+
 	}
 	
 }

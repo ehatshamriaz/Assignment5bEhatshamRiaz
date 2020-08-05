@@ -29,7 +29,7 @@ public class PlayerScript : MonoBehaviour {
 		count = 0;
 		cubeCount=10;
 		palindromesCount=0;
-		objectCount ();
+		//objectCount ();
 
 	}
 	void FixedUpdate ()
@@ -43,10 +43,23 @@ public class PlayerScript : MonoBehaviour {
 	}
 	void Update () {
 		GameObject[] thingyToFind = GameObject.FindGameObjectsWithTag ("PickUp");
-		  cubeCount = thingyToFind.Length;
-		cubeCountText.text="Cubes Left: "+cubeCount;
-		objectCount();
+		cubeCount = thingyToFind.Length; 
+		cubeCountText.text="Cubes Left: "+cubeCount; 
 	}
+    bool palindromeLeft(GameObject[] cubes)
+    {
+        for (int i = 0; i < cubes.Length; i++)
+        {
+            string str = cubes[i].transform.parent.gameObject.GetComponent<TextMesh>().text;
+            if (HPclass.checkPalindrome(str))
+            {
+                return true;
+               
+            }
+        } 
+           return false; 
+ 
+    }
 	void OnTriggerExit(Collider other) 
 	{
 		if(other.gameObject.CompareTag ("bridge"))
@@ -63,9 +76,10 @@ public class PlayerScript : MonoBehaviour {
 		{
 
 			string str=other.transform.parent.gameObject.GetComponent<TextMesh>().text;
-			other.transform.parent.gameObject.SetActive(false);
-            if (HPclass.checkPalindrome(str))
+			
+            if (HPclass.checkPalindrome(str.Trim()))
 			{
+                other.transform.parent.gameObject.SetActive(false);
 				audioSource.Play();
 				isPalindrome=true;
 				palindromesCount=palindromesCount+1;
@@ -110,7 +124,8 @@ public class PlayerScript : MonoBehaviour {
 	}
 	void objectCount ()
 	{
-		if (cubeCount == 0)
+        GameObject[] thingyToFind = GameObject.FindGameObjectsWithTag("PickUp"); 
+        if (!palindromeLeft(thingyToFind))
 		{
 			score.text=palindromesCount+"";
 			completeLevelUI.SetActive(true); 

@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Update button text
-        uiController.ShowButton("Main Menu");
+        uiController.ShowButton("Replay");
     }
 
     /// <summary>

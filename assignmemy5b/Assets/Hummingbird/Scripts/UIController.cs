@@ -21,6 +21,8 @@ public class UIController : MonoBehaviour
 
     [Tooltip("The button")]
     public Button button;
+    [Tooltip("The button")]
+    public Button button2;
 
     [Tooltip("The button text")]
     public TextMeshProUGUI buttonText;
@@ -51,6 +53,7 @@ public class UIController : MonoBehaviour
     {
         buttonText.text = text;
         button.gameObject.SetActive(true);
+        button2.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -59,6 +62,7 @@ public class UIController : MonoBehaviour
     public void HideButton()
     {
         button.gameObject.SetActive(false);
+        button2.gameObject.SetActive(false);
     }
 
     /// <summary>
